@@ -90,7 +90,7 @@
 
 			<section>
 				<h2>Functions as the first class citizen</h2>
-				<pre><code class="haskell" data-trim contenteditable>
+				<pre><code class="haskell" data-trim>
 list = [1, 2, 3]
 
 double n = n + n
@@ -103,6 +103,35 @@ squaredList = map square list -- [1, 4, 9]
 
 zipList = zipWith (+) doubledList squaredList -- [3, 8, 15]
 				</code></pre>
+			</section>
+
+			<section>
+				<section>
+					<h2>FP promotes referencial transparency</h2>
+					<p class="fragment">Just like the function</p>
+					<blockquote class="fragment">$y = f(x)$</blockquote>
+					<p class="fragment">the value of $y$ does not change given the same $x$</p>
+					<p class="fragment">Where as OOP is based on the <em>mutation</em> of states within Objects</p>
+				</section>
+
+				<section>
+					<h3>Filtering a list in OOP and FP</h3>
+					<h4 class="fragment">OOP</h4>
+					<pre class="fragment"><code class="lang-java" data-trim>
+public static List&lt;Integer&gt; positiveIntegers(List&lt;Integer&gt; list) {
+  List&lt;Integer&gt; filtered = new ArrayList&lt;&gt;();
+  for (int i=0; i&lt;list.size(); ++i) {
+    if (list.get(i) &gt; 0) filtered.add(list.get(i));
+  }
+  return filtered;
+}
+					</code></pre>
+					<h4 class="fragment">FP</h4>
+					<pre class="fragment"><code class="haskell" data-trim>
+positives = filter (> 0) -- &ldquo;pointless&rdquo; style
+					</code></pre>
+					<em class="fragment">Notice the usage of mutating i and container list in OOP</em>
+				</section>
 			</section>
 
 		</div>
@@ -135,6 +164,9 @@ zipList = zipWith (+) doubledList squaredList -- [3, 8, 15]
 				callback: function() {
 					hljs.initHighlightingOnLoad();
 				}
+			}, {
+				src: 'plugin/math/math.js',
+				async: true
 			}]
 		});
 	</script>

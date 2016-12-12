@@ -1,50 +1,118 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>Madadata Tech Share - Dec 14th 2016</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+				<h1>FP Primer for OOP Programmers</h1>
+				<h3>
+						Jiayu Liu
+					</h3>
+				<p>Madadata Tech Share (Internal, Not for Sharing)</p>
+				<p>
+					<small>Dec 14th 2016</small>
+				</p>
+			</section>
+
+			<section>
+				<h2>Disclaimer</h2>
+				<p>I did not consult nor check up any textbooks or official definitions while making this slides - read with care if you need verbatim quotes</p>
+			</section>
+
+			<section>
+				<h2>OOP v.s. FP</h2>
+				<p class="fragment">OOP is more widely known</p>
+				<p class="fragment">FP is deeply rooted in lambda calculus</p>
+				<p class="fragment">both are powerful thought-weapons to attack problems</p>
+			</section>
+
+			<section>
+				<h2>Typical OOP concept - <q><a target="_blank" href="https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">SOLID</a></q></h2>
+				<ul>
+					<li class="fragment"><em>S</em>ingle responsibility principle</li>
+					<li class="fragment"><em>O</em>pen/closed principle</li>
+					<li class="fragment"><em>L</em>iskov substitution principle</li>
+					<li class="fragment"><em>I</em>nterface segregation principle</li>
+					<li class="fragment"><em>D</em>ependency inversion principle</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>In OOP, everything is an object</h2>
+				<p class="fragment">there are objects</p>
+				<p class="fragment">they send messages to each others</p>
+				<p class="fragment">each object respond to messages accordingly (and differently)</p>
+				<p class="fragment">to be precise, SmallTalk, Objective-C or even Erlang stick to this rule more strictly than Java</p>
+			</section>
+
+			<section>
+				<h2>Design Patterns</h2>
+				<p class="fragment">cost-effective way to implement some repetitive paradigms in programming</p>
+				<p class="fragment">many people love it, stick to it, even make it textbook</p>
+				<p class="fragment">the famous <a href="https://en.wikipedia.org/wiki/Design_Patterns" target="_blank">gang-of-four</a></p>
+				<p class="fragment">some others dispise it</p>
+				<blockquote class="fragment" cite="http://www.paulgraham.com/icad.html">
+					<p>Human compiler at work - <a href="http://www.paulgraham.com/icad.html" target="_blank">Paul Graham</a></p>
+				</blockquote>
+			</section>
+
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+			transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [{
+				src: 'plugin/markdown/marked.js'
+			}, {
+				src: 'plugin/markdown/markdown.js'
+			}, {
+				src: 'plugin/notes/notes.js',
+				async: true
+			}, {
+				src: 'plugin/highlight/highlight.js',
+				async: true,
+				callback: function() {
+					hljs.initHighlightingOnLoad();
+				}
+			}]
+		});
+	</script>
+</body>
+
 </html>

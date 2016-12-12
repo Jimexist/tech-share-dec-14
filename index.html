@@ -76,8 +76,33 @@
 				<p class="fragment">the famous <a href="https://en.wikipedia.org/wiki/Design_Patterns" target="_blank">gang-of-four</a></p>
 				<p class="fragment">some others dispise it</p>
 				<blockquote class="fragment" cite="http://www.paulgraham.com/icad.html">
-					<p>Human compiler at work - <a href="http://www.paulgraham.com/icad.html" target="_blank">Paul Graham</a></p>
+					<p>&ldquo;Human compiler at work&rdquo; <a href="http://www.paulgraham.com/icad.html" target="_blank">Paul Graham</a></p>
 				</blockquote>
+			</section>
+
+			<section>
+				<h2>Introducing FP</h2>
+				<p class="fragment">In Java, methods cannot exist without an object (<a href="https://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html" target="_blank">famous must-read rant</a>)</p>
+				<p class="fragment">In FP, functions are the first class citizen</p>
+				<p class="fragment">functions can take, use, transform, and return functions (and data)</p>
+				<p class="fragment">data (or <em>the nouns</em>) is piped through a chain of functions</p>
+			</section>
+
+			<section>
+				<h2>Functions as the first class citizen</h2>
+				<pre><code class="haskell" data-trim contenteditable>
+list = [1, 2, 3]
+
+double n = n + n
+
+square n = n * n
+
+doubledList = map double list -- [2, 4, 6]
+
+squaredList = map square list -- [1, 4, 9]
+
+zipList = zipWith (+) doubledList squaredList -- [3, 8, 15]
+				</code></pre>
 			</section>
 
 		</div>

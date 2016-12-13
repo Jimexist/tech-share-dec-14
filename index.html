@@ -8,7 +8,7 @@
 	<title>Madadata Tech Share - Dec 14th 2016</title>
 
 	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/black.css">
+	<link rel="stylesheet" href="css/theme/moon.css">
 
 	<!-- Theme used for syntax highlighting of code -->
 	<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -29,18 +29,15 @@
 
 			<section>
 				<h1>FP Primer for OOP Programmers</h1>
-				<h3>
-						Jiayu Liu
-					</h3>
-				<p>Madadata Tech Share (Internal, Not for Sharing)</p>
-				<p>
-					<small>Dec 14th 2016</small>
-				</p>
+				<h3>Jiayu Liu</h3>
+				<p>Madadata Tech Share (Internal, Not intended for sharing)</p>
+				<p><small>Dec 14th 2016</small></p>
 			</section>
 
 			<section>
 				<h2>Disclaimer</h2>
-				<p>I did not consult nor check up any textbooks or official definitions while making this slides - read with care if you need verbatim quotes</p>
+				<p>Slides are intended for internal sharing only</p>
+				<p>I did not consult nor check up enough textbooks or official definitions while making this slides - read with care</p>
 			</section>
 
 			<section>
@@ -64,56 +61,67 @@
 			<section>
 				<h2>In OOP, everything is an object</h2>
 				<p class="fragment">there are objects</p>
-				<p class="fragment">they send messages to each others</p>
-				<p class="fragment">each object respond to messages accordingly (and differently)</p>
-				<p class="fragment">to be precise, SmallTalk, Objective-C or even Erlang stick to this rule more strictly than Java</p>
+				<p class="fragment">they send messages to each others (and this should be the only way of communication)</p>
+				<p class="fragment">each object responds to messages accordingly (and differently)</p>
+				<p class="fragment">theoritically, SmallTalk, Objective-C or even Erlang stick to this rule more strictly than Java</p>
 			</section>
 
 			<section>
 				<h2>Design Patterns</h2>
-				<p class="fragment">cost-effective way to implement some repetitive paradigms in programming</p>
+				<p class="fragment">cost-effective way to implement some repetitive patterns in programming</p>
 				<p class="fragment">many people love it, stick to it, even make it textbook</p>
 				<p class="fragment">the famous <a href="https://en.wikipedia.org/wiki/Design_Patterns" target="_blank">gang-of-four</a></p>
-				<p class="fragment">some others dispise it</p>
+				<p class="fragment">some others despise it</p>
 				<blockquote class="fragment" cite="http://www.paulgraham.com/icad.html">
-					<p>&ldquo;Human compiler at work&rdquo; <a href="http://www.paulgraham.com/icad.html" target="_blank">Paul Graham</a></p>
+					<p>&ldquo;Human compiler at work&rdquo; - <a href="http://www.paulgraham.com/icad.html" target="_blank">Paul Graham</a></p>
 				</blockquote>
 			</section>
 
 			<section>
 				<h2>Introducing FP</h2>
-				<p class="fragment">In Java, methods cannot exist without an object (<a href="https://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html" target="_blank">famous must-read rant</a>)</p>
+				<p class="fragment">In Java, methods cannot exist outside an object (<a href="https://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html" target="_blank">Steve's famous must-read rant</a>)</p>
 				<p class="fragment">In FP, functions are the first class citizen</p>
 				<p class="fragment">functions can take, use, transform, and return functions (and data)</p>
 				<p class="fragment">data (or <em>the nouns</em>) is piped through a chain of functions</p>
 			</section>
 
 			<section>
-				<h2>Functions as the first class citizen</h2>
-				<pre><code class="haskell" data-trim>
-list = [1, 2, 3]
-
-double n = n + n
-
-square n = n * n
-
-doubledList = map double list -- [2, 4, 6]
-
-squaredList = map square list -- [1, 4, 9]
-
-zipList = zipWith (+) doubledList squaredList -- [3, 8, 15]
-				</code></pre>
+				<section>
+					<h2>FP promotes referencial transparency and immutability</h2>
+				</section>
+				<section>
+					<h3>Just like the functions in Math</h3>
+					<blockquote class="fragment">$y = f(x)$</blockquote>
+					<p class="fragment">the value of $y$ does not change given the same $x$</p>
+					<p class="fragment">whereas OOP is based on the <em>mutation</em> of states within Objects</p>
+					<p class="fragment">often in FP mutation is achieved by constructing new components aside with the old ones</p>
+					<p class="fragment">plays well in recent days where multi-CPU is omnipresent and GC is concurrent and performant (it's much simpler)</p>
+				</section>
+				<section>
+					<h3>How/what to benefit from immutability</h3>
+					<ul>
+						<li class="fragment">code is thread-safe by default - no worry of concurrent access</li>
+						<li class="fragment">easier to debug and reason - when in doubt, copy</li>
+						<li class="fragment">testibility increases - easier to write composible code &amp; tests</li>
+						<li class="fragment">more opportunity for optimization</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Good example is Guava's <em>Immutable Collections</em></h3>
+					<ul>
+						<li class="fragment"><code>ImmutableCollection::copyOf</code> is $O(1)$ given an immutable collection</li>
+						<li class="fragment"><code>ImmutableCollection::reverse</code> is $O(1)$ because of immutable delegation</li>
+						<li class="fragment"><code>ImmutableCollection::subList</code> is $O(1)$ because of immutable delegation</li>
+						<li class="fragment"><code>ImmutableCollection</code> builder can optimize for empty and singleton list (frequent cases)</li>
+						<li class="fragment"><code>ImmutableMap</code> can benefit from immutablility and thus better hashing strategy</li>
+					</ul>
+				</section>
 			</section>
 
 			<section>
 				<section>
-					<h2>FP promotes referencial transparency</h2>
-					<p class="fragment">Just like the function</p>
-					<blockquote class="fragment">$y = f(x)$</blockquote>
-					<p class="fragment">the value of $y$ does not change given the same $x$</p>
-					<p class="fragment">Where as OOP is based on the <em>mutation</em> of states within Objects</p>
+					<h2>FP promotes small and orthogonal functions and their compositions to build complex system</h2>
 				</section>
-
 				<section>
 					<h3>Filtering a list in OOP and FP</h3>
 					<h4 class="fragment">OOP</h4>
@@ -130,10 +138,153 @@ public static List&lt;Integer&gt; positiveIntegers(List&lt;Integer&gt; list) {
 					<pre class="fragment"><code class="haskell" data-trim>
 positives = filter (> 0) -- &ldquo;pointless&rdquo; style
 					</code></pre>
-					<em class="fragment">Notice the usage of mutating i and container list in OOP</em>
+					<em class="fragment">Cheating? Let's see the implementation of <code>filter</code></em>
+					<pre class="fragment"><code class="haskell" data-trim>
+filter :: (a → Bool) → [a] → [a]
+filter _pred []    = []
+filter pred (x:xs)
+  | pred x         = x : filter pred xs
+  | otherwise      = filter pred xs
+					</code></pre>
+				</section>
+				<section>
+					<h3>Now how do we write <code>negativeIntegers</code>?</h3>
+					<pre class="fragment"><code class="java" data-trim>
+public static List&lt;Integer&gt; positiveIntegers(List&lt;Integer&gt; list) {
+  List&lt;Integer&gt; filtered = new ArrayList&lt;&gt;();
+  for (int i=0; i&lt;list.size(); ++i) {
+    if (list.get(i) &gt; 0) filtered.add(list.get(i));
+  }
+  return filtered;
+}
+					</code></pre>
+					<pre class="fragment"><code class="java" data-trim>
+public static List&lt;Integer&gt; negativeIntegers(List&lt;Integer&gt; list) {
+  List&lt;Integer&gt; filtered = new ArrayList&lt;&gt;();
+  for (int i=0; i&lt;list.size(); ++i) {
+    if (list.get(i) &lt; 0) filtered.add(list.get(i));
+  }
+  return filtered;
+}
+					</code></pre>
+					<em class="fragment">code reuse?</em>
+					<pre class="fragment"><code class="java" data-trim>
+public static &lt;T&gt; List&lt;T&gt; filter(List&lt;T&gt; list, Predicate&lt;T&gt; pred);
+					</code></pre>
+				</section>
+				<section>
+					<h3>Java's stream API!</h3>
+					<pre class="fragment"><code class="java" data-trim>
+List&lt;Integer&gt; positives = list.stream()
+	.filter(x → x > 0)
+	.collect(toList())
+					</code></pre>
+					<pre class="fragment"><code class="haskell" data-trim>
+positives = filter (> 0)
+					</code></pre>
+					<em class="fragment">implementation?</em>
+					<p class="fragment"><em>lambda</em> is compiled to a private method, and modern JVM (JIT) is <em>very</em> good at optimizing small functions (&gt; 1000x speed up)</p>
+					<p class="fragment"><em>recap:</em> FP promotes small and orthogonal functions and their compositions to build complex system</p>
 				</section>
 			</section>
 
+			<section>
+				<section>
+					<h2>FP promotes code reuse with higher-order-functions and currying</h2>
+				</section>
+				<section>
+					<h3>in FP we have small functions and compositions</h3>
+					<p class="fragment">but there is one more powerful tool that enables code reuse and composibility</p>
+				</section>
+				<section>
+					<h2>Functions as the first class citizen</h2>
+					<pre class="fragment"><code class="haskell" data-trim>
+list = [1, 2, 3]
+
+double n = n + n
+
+square n = n * n
+
+doubledList = map double list -- [2, 4, 6]
+
+squaredList = map square list -- [1, 4, 9]
+
+zipList = zipWith (+) doubledList squaredList -- [3, 8, 15]
+					</code></pre>
+				</section>
+				<section>
+					<h3>The case of <code>map</code> and <code>filter</code></h3>
+					<pre class="fragment"><code class="haskell" data-trim>
+map :: (a → b) → [a] → [b]
+					</code></pre>
+					<pre class="fragment"><code class="haskell" data-trim>
+filter :: (a → Bool) → [a] → [a]
+					</code></pre>
+					<em class="fragment">takes a function and a list, and returns a list</em>
+					<p class="fragment">in Haskell, the arrow <code>→</code> is right-associative, <em class="fragment">why?</em></p>
+					<p class="fragment">$(f \cdot g) x \equiv f (g (x))$</p>
+					<pre class="fragment"><code class="haskell" data-trim>
+map :: (a → b) → ([a] → [b])
+					</code></pre>
+					<pre class="fragment"><code class="haskell" data-trim>
+filter :: (a → Bool) → ([a] → [a])
+					</code></pre>
+					<em class="fragment">takes a function, returns a function that takes a list and returns a list</em>
+					<pre class="fragment"><code class="haskell" data-trim>
+positives = filter (> 0) -- remember?
+					</code></pre>
+				</section>
+				<section>
+					<h3>The case of <code>map</code> and <code>filter</code>, cont.</h3>
+					<p class="fragment">they are <em>higher-order-functions</em> (HOF) because they take functions and return functions</p>
+					<p class="fragment">we can use HOFs to make code reuse a breeze!</p>
+				</section>
+				<section>
+					<h3>Examples: HOF in action</h3>
+					<pre class="fragment"><code class="javascript" data-trim>
+// this is ES6, and yes JavaScript is functional
+const crsAdjustedCanvasDistance = (crs) => (p1, p2) =>
+	crs.distance(crs.project(p1), crs.project(p2))
+// default globe
+const canvasDistance = crsAdjustedCanvasDistance(WGS84CRS)
+// my own projection
+const customizedDistance = crsAdjustedCanvasDistance(MyCRS)
+					</code></pre>
+					<pre class="fragment"><code class="javascript" data-trim>
+// redux exmaple
+const connect = (mapStateToProps, ...otherConfigs) =>
+  (WrappedComponent) => {
+    // a new component class that populates data and checks props
+  }
+
+// usage
+class MyComponet extends Component {
+  render() { ... }
+}
+export default connect(state => state, ...others)(MyComponet)
+					</code></pre>
+				</section>
+				<section>
+					<h3>What about Java™?</h3>
+					<p class="fragment">In Java no method can exist without an object attaching</p>
+					<p class="fragment">think about <em>Factory Design Pattern</em>™ - takes some (different) configs, returns objects</p>
+					<p class="fragment">think about <em>Aspect Oriented Programing</em>™ - do something similar and cross-cutting various method calls</p>
+					<p class="fragment">think about <em>proxies and delegates</em> - do something before and after the real method call</p>
+					<p class="fragment">there's also <code>decorators</code> in Python and ES7</p>
+					<p class="fragment">probably all just HOF in disguise (recalling what Paul Graham said)</p>
+				</section>
+			</section>
+
+			<section>
+				<h2>Wrap up</h2>
+				<ul>
+					<li>referential transparency and immutability</li>
+					<li>small and composible functions</li>
+					<li>higher order functions</li>
+				</ul>
+				<hr />
+				<h2>Thanks! Questions?</h2>
+			</section>
 		</div>
 	</div>
 

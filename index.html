@@ -221,8 +221,8 @@ map :: (a → b) → [a] → [b]
 filter :: (a → Bool) → [a] → [a]
 					</code></pre>
 					<em class="fragment">takes a function and a list, and returns a list</em>
-					<p class="fragment">in Haskell, the arrow <code>→</code> is right-associative, <em class="fragment">why?</em></p>
-					<p class="fragment">$(f \cdot g) x \equiv f (g (x))$</p>
+					<p class="fragment">in Haskell, the arrow <code>→</code> is associative</p>
+					<p class="fragment">$(g \circ f) x \equiv g (f (x))$</p>
 					<pre class="fragment"><code class="haskell" data-trim>
 map :: (a → b) → ([a] → [b])
 					</code></pre>
